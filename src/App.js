@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import { Container, Box, Alert, Pagination, Typography } from "@mui/material";
+import { Content, Header, DataList } from "./components";
+import { BASE_URL, LOADING_IMAGE } from "./constants";
 export default class App extends Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +12,7 @@ export default class App extends Component {
       featuresPerPage: 15,
       features: [],
       metadata: {},
+      activePage: "home",
       error: null,
     };
     this.fetchEarthQuakes = this.fetchEarthQuakes.bind(this);
@@ -22,11 +24,8 @@ export default class App extends Component {
     axios(
       "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
     )
-      .then((response) => this._isMounted && this.setData(response.data))
-      .catch(
-        (error) =>
-          this._isMounted && this.setState({ error: error, isLoading: false })
-      );
+      .then((response) => this.setData(response.data))
+      .catch((error) => this.setState({ error: error, isLoading: false }));
   }
 
   setData = (result) =>
@@ -39,17 +38,20 @@ export default class App extends Component {
     });
 
   handlePageChange = (e, v) => this.setState({ currentPage: v });
-
+  handleTabs = (e) => this.setState({ activePage: e.target.value });
   componentDidMount() {
-    this._isMounted = true;
     this.fetchEarthQuakes();
   }
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+
   render() {
-    const { error, metadata, features, featuresPerPage, currentPage } =
-      this.state;
+    const {
+      error,
+      isLoading,
+      features,
+      featuresPerPage,
+      currentPage,
+      activePage,
+    } = this.state;
     // const currentTableData = useMemo(() => {
     //   const firstPageIndex = (currentPage - 1) * featuresPerPage;
     //   const lastPageIndex = firstPageIndex + featuresPerPage;
@@ -62,38 +64,27 @@ export default class App extends Component {
     const pageCount = Math.ceil(features.length / featuresPerPage);
 
     return (
-      <div id="App">
+      <div id="app">
+        <Header activeTab={activePage} onTabChange={this.handleTabs} />
         <Container>
-          {/* <div className="header">This is tha app {metadata.title}</div> */}
-
-          <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-              <Toolbar>
-                <Typography variant="h3" component="div">
-                  USGS Earthquakes Past Day
-                </Typography>
-              </Toolbar>
-            </AppBar>
-          </Box>
           {error ? (
-            // <div className="error-message">
-            //   <p>Something went wrong</p>
-            // </div>
-            <Alert severity="error">Something went wrong</Alert>
+            <Alert severity="error">
+              <Typography>Something went wrong</Typography>
+            </Alert>
           ) : (
-            <div className="content">
-              {currentFeatures.map((earthquake) => (
-                <div key={earthquake.id} className="">
-                  <Card variant="outlined" sx={{ margin: "20px" }}>
-                    <Typography component="span">Location:</Typography>
-                    <CardHeader title={earthquake.properties.place} />
-                    <CardContent>
-                      Magnitude: {earthquake.properties.mag}
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
+            <Box>
+              {isLoading ? (
+                <img
+                  src={LOADING_IMAGE}
+                  alt="spinning earth"
+                  width="800"
+                  height="600"
+                />
+              ) : (
+                // <DataList features={currentFeatures} />
+                <Content features={currentFeatures} tab={activePage} />
+              )}
+            </Box>
           )}
           {/* <Map features={features} /> */}
           <Pagination
@@ -101,20 +92,10 @@ export default class App extends Component {
             page={currentPage}
             onChange={this.handlePageChange}
             color="primary"
-            size="large"
-            // sx={{
-            //   display: "flex",
-            //   justifyContent: "space-between",
-            //   alignContent: "center",
-            //   whiteSpace: "nowrap",
-            //   overflow: "hidden",
-            //   width: "100%",
-            //   margin: "0 auto",
-            // }}
+            // size="large"
           ></Pagination>
         </Container>
       </div>
     );
   }
 }
-("https://media.giphy.com/media/wgHY9nSrlTMt2/giphy.gif"); //loading image
