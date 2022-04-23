@@ -8,7 +8,11 @@ export const DataPagination = ({ pageCount, currentPage }) => {
       page={currentPage}
       onChange={handlePageChange}
       color="primary"
-      size="large"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     />
   );
 };
