@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Container, Box, Alert, Pagination, Typography } from "@mui/material";
+import {
+  Container,
+  Box,
+  Alert,
+  Pagination,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import { Content, Header, DataList } from "./components";
 import { BASE_URL, LOADING_IMAGE } from "./constants";
 export default class App extends Component {
@@ -74,12 +81,21 @@ export default class App extends Component {
           ) : (
             <Box>
               {isLoading ? (
-                <img
-                  src={LOADING_IMAGE}
-                  alt="spinning earth"
-                  width="800"
-                  height="600"
-                />
+                // <img
+                //   src={LOADING_IMAGE}
+                //   alt="spinning earth"
+                //   width="800"
+                //   height="600"
+                // />
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CircularProgress size={80} />
+                </Box>
               ) : (
                 // <DataList features={currentFeatures} />
                 <Content features={currentFeatures} tab={activePage} />
@@ -92,7 +108,11 @@ export default class App extends Component {
             page={currentPage}
             onChange={this.handlePageChange}
             color="primary"
-            // size="large"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           ></Pagination>
         </Container>
       </div>
