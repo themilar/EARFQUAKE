@@ -1,11 +1,9 @@
 import Pagination from "@mui/material/Pagination";
-
-export const DataPagination = ({ pageCount, currentPage }) => {
-  const handlePageChange = (_, v) => this.setState({ currentPage: v });
+export const DataPagination = ({ page, count, handlePageChange }) => {
   return (
     <Pagination
-      count={pageCount}
-      page={currentPage}
+      count={count}
+      page={page}
       onChange={handlePageChange}
       color="primary"
       sx={{

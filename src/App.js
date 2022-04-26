@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Container, Box } from "@mui/material";
 import {
-  Container,
-  Box,
-  Alert,
-  Pagination,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
-import { Content, Header, DataList } from "./components";
-import { BASE_URL, LOADING_IMAGE } from "./constants";
+  Content,
+  Header,
+  ErrorMessage,
+  Loading,
+  DataPagination,
+} from "./components";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +42,7 @@ export default class App extends Component {
       };
     });
 
-  handlePageChange = (e, v) => this.setState({ currentPage: v });
+  handlePageChange = (_, v) => this.setState({ currentPage: v });
   handleTabs = (e) => this.setState({ activePage: e.target.value });
   componentDidMount() {
     this.fetchEarthQuakes();
@@ -60,11 +58,6 @@ export default class App extends Component {
       activePage,
       metadata,
     } = this.state;
-    // const currentTableData = useMemo(() => {
-    //   const firstPageIndex = (currentPage - 1) * featuresPerPage;
-    //   const lastPageIndex = firstPageIndex + featuresPerPage;
-    //   return features.slice(firstPageIndex, lastPageIndex);
-    // }, [currentPage]);
 
     const indexOfLastPost = currentPage * featuresPerPage;
     const indexOfFirstPost = indexOfLastPost - featuresPerPage;
@@ -76,29 +69,12 @@ export default class App extends Component {
         <Header activeTab={activePage} onTabChange={this.handleTabs} />
         <Container>
           {error ? (
-            <Alert severity="error">
-              <Typography>Something went wrong</Typography>
-            </Alert>
+            <ErrorMessage />
           ) : (
             <Box>
               {isLoading ? (
-                // <img
-                //   src={LOADING_IMAGE}
-                //   alt="spinning earth"
-                //   width="800"
-                //   height="600"
-                // />
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <CircularProgress size={80} />
-                </Box>
+                <Loading />
               ) : (
-                // <DataList features={currentFeatures} />
                 <Content
                   features={currentFeatures}
                   tab={activePage}
@@ -107,18 +83,11 @@ export default class App extends Component {
               )}
             </Box>
           )}
-          {/* <Map features={features} /> */}
-          <Pagination
+          <DataPagination
             count={pageCount}
             page={currentPage}
-            onChange={this.handlePageChange}
-            color="primary"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          ></Pagination>
+            handlePageChange={this.handlePageChange}
+          />
         </Container>
       </div>
     );

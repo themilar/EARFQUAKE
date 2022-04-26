@@ -15,7 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 const pages = ["Home", "Map", "Summary"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-export const ResponsiveAppBar = ({ activeTab, onTabChange }) => {
+export const ResponsiveAppBar = ({ onTabChange }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -44,7 +44,7 @@ export const ResponsiveAppBar = ({ activeTab, onTabChange }) => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            LOGO
+            USGS Earthquakes, Past Day
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
