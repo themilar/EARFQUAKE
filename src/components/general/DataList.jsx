@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import DataCard from "./DataCard";
-export function DataList({ features }) {
+export default function DataList({ features }) {
   return (
     <Box>
       {features.map((earthquake) => (

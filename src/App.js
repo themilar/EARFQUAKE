@@ -58,6 +58,7 @@ export default class App extends Component {
       featuresPerPage,
       currentPage,
       activePage,
+      metadata,
     } = this.state;
     // const currentTableData = useMemo(() => {
     //   const firstPageIndex = (currentPage - 1) * featuresPerPage;
@@ -98,7 +99,11 @@ export default class App extends Component {
                 </Box>
               ) : (
                 // <DataList features={currentFeatures} />
-                <Content features={currentFeatures} tab={activePage} />
+                <Content
+                  features={currentFeatures}
+                  tab={activePage}
+                  metadata={metadata}
+                />
               )}
             </Box>
           )}

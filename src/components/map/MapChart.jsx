@@ -12,7 +12,7 @@ export default function Map(props) {
     id: f.id,
     title: f.properties.title,
     coordinates: f.geometry.coordinates,
-    signifcance: f.properties.sig,
+    significance: f.properties.sig,
   }));
 
   const geoUrl =
@@ -39,12 +39,12 @@ export default function Map(props) {
         }
       </Geographies>
       {markers.map(
-        ({ id, title, coordinates, signifcance, markerOffset }, pk) => (
+        ({ id, title, coordinates, significance, markerOffset }, pk) => (
           <Marker key={id} coordinates={coordinates}>
             <MarkerIcon />
             <text
               textAnchor="middle"
-              y={25}
+              y={-10}
               style={{ fontSize: 11, fontFamily: "system-ui", fill: "#5D5A6D" }}
             >
               {pk}
