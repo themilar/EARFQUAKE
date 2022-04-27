@@ -10,21 +10,22 @@ export function DataCard({ earthquake }) {
   const timeStamp = fromUnixTime(
     millisecondsToSeconds(earthquake.properties.time)
   );
-  console.log(format(timeStamp, "dd/MM/yyyy"));
   return (
     <Card variant="outlined" sx={customStyles}>
-      <Typography component="span">
-        Location: {earthquake.properties.place}
-      </Typography>
-      <Typography component="p">
-        Longitude: {earthquake.geometry.coordinates[0]}
-      </Typography>
-      <Typography component="p">
-        Latitude: {earthquake.geometry.coordinates[1]}
-      </Typography>
-
       <CardContent>
-        Magnitude: {earthquake.properties.mag} Time: {format(timeStamp, "Pp")}
+        <Typography component="p" sx={{ mb: 1.5 }}>
+          Location: {earthquake.properties.place}
+        </Typography>
+        <Typography component="p">
+          Longitude: {earthquake.geometry.coordinates[0]}°
+        </Typography>
+        <Typography component="p">
+          Latitude: {earthquake.geometry.coordinates[1]}°
+        </Typography>
+        <Typography>Magnitude: {earthquake.properties.mag}</Typography>
+        <Typography color="text.secondary">
+          Date, Time: {format(timeStamp, "Pp")}
+        </Typography>
       </CardContent>
     </Card>
     //alternative time format string Pp

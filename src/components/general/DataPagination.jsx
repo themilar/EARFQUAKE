@@ -10,6 +10,10 @@ export const DataPagination = ({ page, count, handlePageChange }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        width: "100%",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
       }}
     />
   );

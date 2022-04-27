@@ -6,7 +6,7 @@ import {
 } from "react-simple-maps";
 
 import MarkerIcon from "./MarkerIcon";
-
+// ,aterial ui toggle for total or paginated gaetures
 export default function Map(props) {
   const markers = props.features.map((f) => ({
     id: f.id,

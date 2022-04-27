@@ -12,7 +12,15 @@ export const Loading = () => (
     >
       <CircularProgress size={80} />
     </Box>
-    <Typography component="div" color="text.secondary">
+    <Typography
+      component="div"
+      color="text.secondary"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       Loading...
     </Typography>
   </>
