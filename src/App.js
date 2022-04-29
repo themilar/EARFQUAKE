@@ -79,15 +79,16 @@ export default class App extends Component {
                   features={currentFeatures}
                   tab={activePage}
                   metadata={metadata}
-                />
+                >
+                  <DataPagination
+                    count={pageCount}
+                    page={currentPage}
+                    handlePageChange={this.handlePageChange}
+                  />
+                </Content>
               )}
             </Box>
           )}
-          <DataPagination
-            count={pageCount}
-            page={currentPage}
-            handlePageChange={this.handlePageChange}
-          />
         </Container>
       </div>
     );
