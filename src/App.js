@@ -77,6 +77,7 @@ export default class App extends Component {
               ) : (
                 <Content
                   features={currentFeatures}
+                  totalFeatures={features}
                   tab={activePage}
                   metadata={metadata}
                 >
