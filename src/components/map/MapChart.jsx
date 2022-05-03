@@ -60,15 +60,15 @@ export default function Map(props) {
             <MarkerIcon />
             <text
               textAnchor="middle"
-              y={-10}
+              y={-25}
               style={{ fontSize: 11, fontFamily: "system-ui", fill: "#5D5A6D" }}
             >
-              {pk}
+              {significance}
             </text>
           </Marker>
         ))}
       </ComposableMap>
-      {all || props.children}
+      {!all ? props.children : null}
     </>
   );
 }
