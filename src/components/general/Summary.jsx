@@ -10,7 +10,7 @@ export const Summary = ({ metadata }) => (
       There have been {metadata.count} earthquakes in the past day.
     </Typography>
     <Typography variant="subtitle1">
-      The numbers disdplayed above markers on the map indicate the siginificance
+      The numbers displayed above markers on the map indicate the siginificance
       of the event, they are determined by a number of factors, including
       magnitude, felt report, estimated impact, maximum mmi (The maximum
       estimated instrumental intensity for the event).
