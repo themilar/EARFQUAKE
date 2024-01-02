@@ -22,7 +22,7 @@ export default function Map(props) {
   const handleChange = (e, newValue) => setAll(newValue);
 
   const geoUrl =
-    "./topojson-file.json";
+    "https://raw.githubusercontent.com/themilar/EARFQUAKE/main/src/components/map/topojson-file.json";
 
   return (
     <>
