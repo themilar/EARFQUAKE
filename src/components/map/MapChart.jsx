@@ -22,7 +22,7 @@ export default function Map(props) {
   const handleChange = (e, newValue) => setAll(newValue);
 
   const geoUrl =
-    "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+    "./topojson-file.json";
 
   return (
     <>
